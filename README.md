@@ -115,12 +115,14 @@ Now both modules are configured, leave one of them plugged into the Raspberry Pi
 
 ```
 zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 loopbacktest 115200
-Opening the serial device... Starting an endless loopback test.
+Opening the serial device... OK
+Starting an endless loopback test.
 The current date and time will be sent, and the program will wait for a response and display it.
 Press ctrl+c to stop.
 ------------------------------------
-Received: 3-1-17 02:16:39
-Received: 3-1-17 02:16:40
-Received: 3-1-17 02:16:41
+Received: 3-1-17 02:19:08
+Received: 3-1-17 02:19:09
+Received: 3-1-17 02:19:10
+Received: 3-1-17 02:19:12
 ^C
 ```
