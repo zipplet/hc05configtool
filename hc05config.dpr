@@ -408,6 +408,7 @@ begin
 end;
 
 { --------------------------------------------------------------------------
+  Set the communications baud rate on the TX/RX pins.
   -------------------------------------------------------------------------- }
 procedure CommandSetDataBaudRate(comhandle: thandle);
 const
@@ -442,9 +443,19 @@ begin
 end;
 
 { --------------------------------------------------------------------------
+  Perform a loopback test
   -------------------------------------------------------------------------- }
 procedure CommandLoopBackTest(comhandle: thandle);
 begin
+  writeln('Starting an endless loopback test.');
+  writeln('The current date and time will be sent, and the program will wait for a response and display it.');
+  writeln('Press ctrl+c to stop.');
+  writeln('------------------------------------');
+  repeat
+    WriteLine(comhandle, datetimetostr(now));
+    writeln('Received: ' + GetLine(comhandle));
+    sleep(1000);
+  until false;
 end;
 
 { --------------------------------------------------------------------------
@@ -495,6 +506,7 @@ begin
   end;
 
   devicefilename := paramstr(1);
+  cmd := lowercase(paramstr(2));
   if not fileexists(devicefilename) then begin
     writeln('Error: The device ' + devicefilename + ' does not exist.');
     exit;
@@ -529,9 +541,26 @@ begin
   { We want raw comms }
   cfmakeraw(comsettings);
 
+  { Yes, this code is awful! Junk. TODO: Make it sensible }
   { Set baudrate }
-  cfsetospeed(comsettings, B38400);
-  cfsetispeed(comsettings, B38400);
+  if cmd <> 'loopbacktest' then begin
+    cfsetospeed(comsettings, B38400);
+    cfsetispeed(comsettings, B38400);
+  end else begin
+    if paramstr(3) = '9600' then begin
+      cfsetospeed(comsettings, B9600);
+      cfsetispeed(comsettings, B9600);
+    end else if paramstr(3) = '38400' then begin
+      cfsetospeed(comsettings, B38400);
+      cfsetispeed(comsettings, B38400);
+    end else if paramstr(3) = '115200' then begin
+      cfsetospeed(comsettings, B115200);
+      cfsetispeed(comsettings, B115200);
+    end else begin
+      writeln('Error: Bad baud rate');
+      exit;
+    end;
+  end;
 
   { Ignore modem controls }
   comsettings.c_cflag := comsettings.c_cflag or (CLOCAL or CREAD);
@@ -568,24 +597,23 @@ begin
   { Flush everything }
   tcflush(comhandle, TCIOFLUSH);
 
-  { First send an empty command anyway incase the module has received some garbage }
-  WriteLine(comhandle, 'AT');
-  sleep(500);
-  tcflush(comhandle, TCIFLUSH);
-
-  writeln('OK');
-
-  write('Checking if the module is responding... ');
-  WriteLine(comhandle, 'AT');
-  s := GetLine(comhandle);
-  if s <> 'OK' then begin
-    writeln('failed');
-    writeln('Error: Unexpected response: ' + s);
-    exit;
+  if cmd <> 'loopbacktest' then begin
+    { First send an empty command anyway incase the module has received some garbage }
+    WriteLine(comhandle, 'AT');
+    sleep(500);
+    tcflush(comhandle, TCIFLUSH);
+    writeln('OK');
+    write('Checking if the module is responding... ');
+    WriteLine(comhandle, 'AT');
+    s := GetLine(comhandle);
+    if s <> 'OK' then begin
+      writeln('failed');
+      writeln('Error: Unexpected response: ' + s);
+      exit;
+    end;
   end;
   writeln('OK');
 
-  cmd := lowercase(paramstr(2));
   if cmd = 'info' then begin
     CommandInfo(comhandle);
   end else if cmd = 'reboot' then begin
