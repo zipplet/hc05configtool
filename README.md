@@ -1,6 +1,13 @@
 # hc05configtool
 A tool for configuring HC-05 wireless modules easily.
 
+## Issues
+
+* This only works on a Raspberry Pi right now, but probably will work on any PC running Linux using a USB to TTL converter cable __(make sure you get one with 3.3V TX/RX levels)__
+* The code is terrible, and does not actually comply with the AT command spec properly; that will change.
+* No windows support yet. Coming soon, perhaps even a nice GUI.
+* At some point, I'll add an Arduino version. You would connect 2 modules to the Arduino, and it would pair them automatically for you using a pseudorandom PIN code.
+
 ## Eh? What's this?
 There is a common wireless module used by hobbyists when building things that need wireless communication locally between each other called the "HC-05" (there is also a variant called the "HC-06" but I do not have any).
 
@@ -126,3 +133,5 @@ Received: 3-1-17 02:19:10
 Received: 3-1-17 02:19:12
 ^C
 ```
+
+Now that both modules are configured, you can do what you want with them - when power cycled they will always re-establish the connection. Use them both with microcontrollers? Connect both of them to USB<->TTL converters and make a wireless serial connection between 2 computers? Endless possibilities!
