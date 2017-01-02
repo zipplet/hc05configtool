@@ -17,7 +17,9 @@ __At the moment, only Linux (Raspberry Pi) is supported; Windows support will co
 
 All you need to do is:
 * Get a pair of modules (and for now, a Raspberry Pi - later I will support Windows and Linux on a PC with a TTL USB cable, and perhaps even Arduino as a virtual TTL USB cable or via a sketch that you upload and run)
-* Disable the serial console on your Raspberry Pi (sudo raspi-config) and then turn off the Raspberry Pi.
+* Disable the serial console on your Raspberry Pi (sudo raspi-config), but __do not turn the Pi off yet__
+* Edit /boot/config.txt and make sure that you change __enable_uart=0__ to __enable_uart=1__
+* Now you can power down your Pi.
 * Connect the module to the Raspberry Pi:
   * For modules without a KEY pin (button instead): Connect +5v, ground, TX and RX correctly.
   * For modules with a KEY pin: Connect +5v, ground, TX, RX and then connect the KEY pin to the +3.3V rail on the Pi (NOT 5V).
