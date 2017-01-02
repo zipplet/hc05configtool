@@ -23,4 +23,6 @@ All you need to do is:
 * Connect the module to the Raspberry Pi:
   * For modules without a KEY pin (button instead): Connect +5v, ground, TX and RX correctly.
   * For modules with a KEY pin: Connect +5v, ground, TX, RX and then connect the KEY pin to the +3.3V rail on the Pi (NOT 5V).
+* If your module has a button instead of a KEY pin - hold down this button and connect power to the Raspberry Pi. Let go after about 2 seconds.
+* If your module has a KEY pin, just power up the Pi.
 * Run this program without any parameters for instructions. You will need to use it twice, once for each module.
