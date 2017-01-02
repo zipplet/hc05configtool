@@ -4,7 +4,9 @@ A tool for configuring HC-05 wireless modules easily.
 ## Eh? What's this?
 There is a common wireless module used by hobbyists when building things that need wireless communication locally between each other called the "HC-05" (there is also a variant called the "HC-06" but I do not have any).
 
-Once they are configured they are nice - power up both modules and they immediately establish a virtual serial link at TTL voltage levels. Temporarily power cycle one and it will reconnect. You can even have multiple projects using these modules in the same room, and they will connect to the correct modules acting like virtual serial cables. Small amounts of packet loss are tolerated by the module and data gets retransmitted automatically - very nice.
+If you have not heard of these before, try searching for "hc-05 rs232" on Amazon, eBay or similar and you shall see many of them for sale - typically shipped from China.
+
+Once they are configured they are nice - power up both modules and very quickly establish a virtual serial link at TTL voltage levels. Temporarily power cycle one and it will reconnect. You can even have multiple projects using these modules in the same room, and they will connect to the correct modules acting like virtual serial cables. Small amounts of packet loss are tolerated by the module and data gets retransmitted automatically - very nice. As they use bluetooth the communications range is not extreme, but for most projects they are a good fit.
 
 They are perfect for things like microcontrollers / Arduino / Raspberry Pi. They use bluetooth, but hide all of that from you. They tend to come pre-soldered onto a breakout board that just exposes TX, RX, power, ground, sometimes a "KEY" pin (if not a button instead) and often a couple of other pins for you to determine if they have established a link or not. 
 
