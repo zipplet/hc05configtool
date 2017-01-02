@@ -26,3 +26,34 @@ All you need to do is:
 * If your module has a button instead of a KEY pin - hold down this button and connect power to the Raspberry Pi. Let go after about 2 seconds.
 * If your module has a KEY pin, just power up the Pi.
 * Run this program without any parameters for instructions. You will need to use it twice, once for each module.
+
+## Example: Configuring a slave device (do this first before configuring the master)
+
+```
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 info
+Opening the serial device... OK
+Checking if the module is responding... OK
+Firmware version                              : 2.0-20100601
+Device state                                  : INITIALIZED
+Bluetooth address                             : 1234:12:abcdef
+Password / passcode / PIN                     : 1234
+UART (baud rate, extra stop bits, parity bit) : 38400,0,0
+Master / slave mode (SPP)                     : SLAVE
+Connection mode (CMODE)                       : 0
+Number of authenticated devices               : 0
+Most recent bluetooth remote peer address     : 0:0:0
+Configured bind address (if master)           : 0:0:0
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 setslave 3333
+Opening the serial device... OK
+Checking if the module is responding... OK
+Configuring the module as a slave device with the PIN code 3333
+Confirming the configuration...
+Complete.
+Bluetooth device address to use to pair with the master: 1234:12:abcdef
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 setdatabaudrate 115200
+Opening the serial device... OK
+Checking if the module is responding... OK
+Changing the baud rate to 115200 with 1 stop bit and no parity
+Confirming the configuration...
+Complete.
+```
