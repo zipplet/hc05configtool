@@ -108,3 +108,19 @@ Checking if the module is responding... OK
 Rebooting/resetting the module (this will not have the intended effect if the module has a KEY pin).
 Complete. The module should now be in data mode.
 ```
+
+## Example: Loopback testing
+
+Now both modules are configured, leave one of them plugged into the Raspberry Pi (issue a "reboot" command from hc05config if you have not). Plug the other into a breadboard, short TX and RX together with a jumper wire, and apply power. The LEDs on both modules should settle down into a regular pulse pattern. Make sure you use the baud rate you configured using __setdatabaudrate__ - if you did not use that command, the baud rate will be __9600__.
+
+```
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 loopbacktest 115200
+Opening the serial device... Starting an endless loopback test.
+The current date and time will be sent, and the program will wait for a response and display it.
+Press ctrl+c to stop.
+------------------------------------
+Received: 3-1-17 02:16:39
+Received: 3-1-17 02:16:40
+Received: 3-1-17 02:16:41
+^C
+```
