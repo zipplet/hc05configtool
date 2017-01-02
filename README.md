@@ -56,4 +56,55 @@ Checking if the module is responding... OK
 Changing the baud rate to 115200 with 1 stop bit and no parity
 Confirming the configuration...
 Complete.
+
+# This next step is optional if you will be disconnecting the device, etc. It takes it out of config mode.
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 reboot
+Opening the serial device... OK
+Checking if the module is responding... OK
+Rebooting/resetting the module (this will not have the intended effect if the module has a KEY pin).
+Complete. The module should now be in data mode.
+```
+
+## Example: Configuring a master device to pair to the slave configured above
+
+```
+# This reset command step is not really needed, just demonstrating it
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 reset
+Opening the serial device... OK
+Checking if the module is responding... OK
+Resetting module to factory default settings
+Clearing any paired devices
+Complete.
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 info
+Opening the serial device... OK
+Checking if the module is responding... OK
+Firmware version                              : 2.0-20100601
+Device state                                  : INITIALIZED
+Bluetooth address                             : 9999:11:555555
+Password / passcode / PIN                     : 1234
+UART (baud rate, extra stop bits, parity bit) : 38400,0,0
+Master / slave mode (SPP)                     : SLAVE
+Connection mode (CMODE)                       : 0
+Number of authenticated devices               : 0
+Most recent bluetooth remote peer address     : 0:0:0
+Configured bind address (if master)           : 0:0:0
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 setmaster 3333 1234:12:abcdef
+Opening the serial device... OK
+Checking if the module is responding... OK
+Configuring the module as a master device with the PIN code 3333 pairing to device 1234:12:abcdef
+Confirming the configuration...
+Complete.
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 setdatabaudrate 115200
+Opening the serial device... OK
+Checking if the module is responding... OK
+Changing the baud rate to 115200 with 1 stop bit and no parity
+Confirming the configuration...
+Complete.
+
+# This next step is optional if you will be disconnecting the device, etc. It takes it out of config mode.
+zipplet@buildpi1:~/build/hc05config $ ./hc05config /dev/ttyAMA0 reboot
+Opening the serial device... OK
+Checking if the module is responding... OK
+Rebooting/resetting the module (this will not have the intended effect if the module has a KEY pin).
+Complete. The module should now be in data mode.
 ```
