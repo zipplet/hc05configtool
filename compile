@@ -1,0 +1,7 @@
+#!/bin/sh
+./clean
+
+COMMONOPTS="-Sd -XX"
+FPC="fpc"
+
+$FPC $COMMONOPTS hc05config.dpr
