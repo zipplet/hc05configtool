@@ -3,7 +3,7 @@ A tool for configuring HC-05 wireless modules easily.
 
 ## Issues
 
-* This only works on a Raspberry Pi right now, but probably will work on any PC running Linux using a USB to TTL converter cable __(make sure you get one with 3.3V TX/RX levels)__
+* This only works on a Linux computer (USB Serial to 3.3V TTL adaptor) or Raspberry Pi right now __(make sure the TX/RX pins are really 3.3V or the module may be destroyed)__
 * The code is terrible, and does not actually comply with the AT command spec properly; that will change.
 * No windows support yet. Coming soon, perhaps even a nice GUI.
 * At some point, I'll add an Arduino version. You would connect 2 modules to the Arduino, and it would pair them automatically for you using a pseudorandom PIN code.
@@ -20,18 +20,20 @@ They are perfect for things like microcontrollers / Arduino / Raspberry Pi. They
 The problem is they come unconfigured. Configuring them is an absolute pain. You have to put them into programming mode, then send a specific sequence of commands to both modules before they will pair with each other. Get it wrong and you can make it very insecure or just end up banging your head against the desk in frustration.
 
 ## How do I use it?
-__At the moment, only Linux (Raspberry Pi) is supported; Windows support will come later__
+__At the moment, only Linux is supported (including the Raspberry Pi - which is convenient as it the Pi's UART is 3.3V TTL); Windows support will come later__
+
+__To use this with a PC, you need Linux (if you have a Windows or Mac machine just use VirtualBox, install Linux, connect a USB serial to 3.3V TTL adaptor to your VM and bind it to the VM - I have tested this and it works fine)__
 
 All you need to do is:
-* Get a pair of modules (and for now, a Raspberry Pi - later I will support Windows and Linux on a PC with a TTL USB cable, and perhaps even Arduino as a virtual TTL USB cable or via a sketch that you upload and run)
-* Disable the serial console on your Raspberry Pi (sudo raspi-config), but __do not turn the Pi off yet__
-* Edit /boot/config.txt and make sure that you change __enable_uart=0__ to __enable_uart=1__
-* Now you can power down your Pi.
-* Connect the module to the Raspberry Pi:
+* Get a pair of modules (and for now, a Raspberry Pi or Linux computer/VM - later I will support Windows
+* Pi users: Disable the serial console on your Raspberry Pi (sudo raspi-config), but __do not turn the Pi off yet__
+* Pi users: Edit /boot/config.txt and make sure that you change __enable_uart=0__ to __enable_uart=1__
+* Pi users: Now you can power down your Pi.
+* Connect the module to the Raspberry Pi or to your USB serial to TTL converter (it MUST be a 3.3V level converter!)
   * For modules without a KEY pin (button instead): Connect +5v, ground, TX and RX correctly.
   * For modules with a KEY pin: Connect +5v, ground, TX, RX and then connect the KEY pin to the +3.3V rail on the Pi (NOT 5V).
-* If your module has a button instead of a KEY pin - hold down this button and connect power to the Raspberry Pi. Let go after about 2 seconds.
-* If your module has a KEY pin, just power up the Pi.
+* If your module has a button instead of a KEY pin - hold down this button and connect power to the Raspberry Pi or USB TTL adaptor. Let go after about 2 seconds.
+* If your module has a KEY pin, just power up the Pi or USB TTL adaptor.
 * Run this program without any parameters for instructions. You will need to use it twice, once for each module.
 
 ## Example: Configuring a slave device (do this first before configuring the master)
