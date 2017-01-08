@@ -1,6 +1,6 @@
 { --------------------------------------------------------------------------
   A tool to easily configure HC-05 wireless modules.
-  Currently Raspberry Pi / Linux only.
+  Currently generic Linux only (including Raspberry Pi).
 
   Yup, this code is awful and thrown together. Who cares for now, it works!
   AND NO I DO NOT CORRECTLY INTERPRET AT COMMANDS. AGAIN, it does not matter (yet)
@@ -542,7 +542,7 @@ begin
   cfmakeraw(comsettings);
 
   { Yes, this code is awful! Junk. TODO: Make it sensible }
-  { Set baudrate }
+  { Set baudrate - only allow ones the module supports }
   if cmd <> 'loopbacktest' then begin
     cfsetospeed(comsettings, B38400);
     cfsetispeed(comsettings, B38400);
@@ -550,12 +550,24 @@ begin
     if paramstr(3) = '9600' then begin
       cfsetospeed(comsettings, B9600);
       cfsetispeed(comsettings, B9600);
+    end else if paramstr(3) = '19200' then begin
+      cfsetospeed(comsettings, B19200);
+      cfsetispeed(comsettings, B19200);
     end else if paramstr(3) = '38400' then begin
       cfsetospeed(comsettings, B38400);
       cfsetispeed(comsettings, B38400);
+    end else if paramstr(3) = '57600' then begin
+      cfsetospeed(comsettings, B57600);
+      cfsetispeed(comsettings, B57600);
     end else if paramstr(3) = '115200' then begin
       cfsetospeed(comsettings, B115200);
       cfsetispeed(comsettings, B115200);
+    end else if paramstr(3) = '230400' then begin
+      cfsetospeed(comsettings, B230400);
+      cfsetispeed(comsettings, B230400);
+    end else if paramstr(3) = '460800' then begin
+      cfsetospeed(comsettings, B460800);
+      cfsetispeed(comsettings, B460800);
     end else begin
       writeln('Error: Bad baud rate');
       exit;
