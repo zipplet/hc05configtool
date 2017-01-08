@@ -113,47 +113,47 @@ var
 begin
   WriteLine(comhandle, 'AT+VERSION?');
   mod_version := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, tciflush);
 
   WriteLine(comhandle, 'AT+PSWD?');
   mod_password := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, tciflush);
 
   WriteLine(comhandle, 'AT+UART?');
   mod_baud := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+STATE?');
   mod_state := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+ROLE?');
   mod_role := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+ADDR?');
   mod_addr := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+CMODE?');
   mod_cmode := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+ADCN?');
   mod_authed_count := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+MRAD?');
   mod_most_recent_address := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+BIND?');
@@ -235,12 +235,12 @@ begin
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+RMAAD');
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+ADDR?');
   addr := AfterColon(GetLine(comhandle));
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+UART=9600,0,0');
@@ -275,7 +275,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+ROLE?');
@@ -283,7 +283,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+PSWD?');
@@ -291,7 +291,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   writeln('Complete.');
@@ -324,7 +324,7 @@ begin
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+RMAAD');
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+UART=9600,0,0');
@@ -369,7 +369,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+ROLE?');
@@ -377,7 +377,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+PSWD?');
@@ -385,7 +385,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+CMODE?');
@@ -393,7 +393,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   WriteLine(comhandle, 'AT+BIND?');
@@ -401,7 +401,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   writeln('Complete.');
@@ -436,7 +436,7 @@ begin
     writeln(CONFIG_ERROR);
     halt;
   end;
-  sleep(500);
+  sleep(50);
   tcflush(comhandle, TCIFLUSH);
 
   writeln('Complete.');
@@ -454,7 +454,7 @@ begin
   repeat
     WriteLine(comhandle, datetimetostr(now));
     writeln('Received: ' + GetLine(comhandle));
-    sleep(1000);
+    sleep(100);
   until false;
 end;
 
